@@ -2,9 +2,12 @@
 
 using namespace std;
 
+int translateInputToInt(char input);
+
 int main(int argc, char const *argv[]) {
   const int ROCK = 0, PAPER = 1, SCISSORS = 2;
   char opponent_choice, my_choice;
+  int total_score = 0;
   // A = Rock       - 1 Point
   // B = Paper      - 2 Points
   // C = Scissors   - 3 Points
@@ -47,44 +50,42 @@ int main(int argc, char const *argv[]) {
         }
       }
 
-      cout << points_matrix[i][j] << " ";
+      // cout << points_matrix[i][j] << " ";
     }
-    cout << "\n";
+    // cout << "\n";
   }
-
-  exit(0);
 
   // read input
   while (!cin.eof()) {
     cin >> opponent_choice;
     cin >> my_choice;
 
-    switch (opponent_choice) {
-      case 'A':
-        cout << "A";
-        break;
+    total_score += points_matrix[translateInputToInt(my_choice)][translateInputToInt(opponent_choice)];
 
-      case 'B':
-        cout << "B";
-        break;
-
-      case 'C':
-        cout << "C";
-        break;
-
-      default:
-        cout << "Error in input";
-        exit(0);
-    }
-
-    cin.get();             // reads in the new line character \n after the input (on the same line)
-    char c2 = cin.peek();  // reads first character of the next line
-
-    if ((c2 == '\n') || (cin.eof())) {
-      // end of this elf
-      // cout << "total calories: " << total_calories << endl;
-    }
+    cin.get();   // reads in the new line character \n after the input (on the same line)
+    cin.peek();  // reads first character of the next line
   }
 
+  cout << total_score << endl;
+
   return 0;
+}
+
+int translateInputToInt(char input) {
+  switch (input) {
+    case 'A':
+    case 'X':
+      return 0;
+      break;
+    case 'B':
+    case 'Y':
+      return 1;
+      break;
+    case 'C':
+    case 'Z':
+      return 2;
+      break;
+    default:
+      return 3;
+  }
 }
