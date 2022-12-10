@@ -31,3 +31,6 @@
 *.out
 *.app
 rock_paper_scissors
+
+
+.vscode
